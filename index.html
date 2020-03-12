@@ -18,11 +18,13 @@
         .textarea {
             background: #53748a;
             background:#4a6b82;
+            display:none;
         }
         .chat {
             background:#4a6b82;
             min-height:600px;
             padding-top:20px;
+            display:none;
         }
         .chat-area-interna {
             min-height:600px;
@@ -49,7 +51,6 @@
             float:right;
             max-width:500px;
         }
-
         texto {
             margin:0;
             padding:0;
@@ -57,7 +58,6 @@
             padding-right:20px;
             margin-top:5px;
         }
-
         .naoSouEu {
             background:#faf6f6!important;
             color:#003366;
@@ -68,22 +68,35 @@
             border-radius:50%;
             margin-right:10px;
         }
-
         .hora {
             text-align: right;
             font-size:11px;
             float:right;
         }
+        .div-cadastre-se {
+            background:white;
+            border-radius:10px;
+            margin-top:50px;
+            padding:10px;
+        }
     </style>
 </head>
 <body>
+    <div class="jumbotron" align="center">
+        <h1 class="display-4">MerdoChat</h1>
+        <p class="lead">O chat mais merda que você verá hoje!</p>
+        <hr class="my-4">
+
+        <p class="lead">
+          <button class="btn btn-primary btn-lg entrar" href="#" role="button">Entrar nessa porra!</button>
+        </p>
+    </div>
 
     <div class="container">
+
         <div class="row">
 
             <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 chat" align="center">
-                <button class="btn btn-primary btn-block entrar" style="margin-bottom:10px">Entrar</button>
-                
                 <div class="col-md-12 chat-area-interna"></div>
             </div>
 
@@ -116,14 +129,26 @@
         messagingSenderId: "G-K9C9PCBKFZ"
     };
 
+    if (localStorage.getItem('user')) {
+        $(".chat").show();
+        $(".textarea").show();
+        $(".jumbotron").hide();
+    }
+
     $(".entrar").click(function() {
         var usuario = prompt('Digite o seu nome');
         var email = prompt('Digite o seu E-mail');
         localStorage.setItem('user', usuario);
 
-        var gravatar = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(email)+'?s=30';
-        localStorage.setItem('email', gravatar);
-    })
+        if (usuario != '' && email != '') {
+            var gravatar = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(email)+'?s=30';
+            localStorage.setItem('email', gravatar);
+
+            location.reload();
+        } else {
+            alert('Nome e E-mail é obrigatório para entrar!');
+        }
+    });
 
     firebase.initializeApp(config);
     mensagens();
