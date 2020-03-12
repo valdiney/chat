@@ -9,6 +9,8 @@
     <style>
         body {
             background:#53748a;
+            margin:0;
+            padding:0;
         }
         textarea {
             width:100%;
@@ -79,6 +81,21 @@
             margin-top:50px;
             padding:10px;
         }
+        .centered {
+            width:100%;
+            margin:0 auto;
+        }
+        .titulo {
+            color:white;
+            display:block;
+            text-align: center;
+           
+            border-radius:10px;
+        }
+        .col-centered {
+            float: none;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -92,23 +109,21 @@
         </p>
     </div>
 
-    <div class="container">
-
-        <div class="row">
-
-            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 chat" align="center">
-                <div class="col-md-12 chat-area-interna"></div>
-            </div>
-
-            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 textarea">
-                <textarea name="" id="textarea" placeholder="Escreva aqui..."></textarea>
-                <!--<button class="btn btn-success btn-block enviar">Enviar</button>-->
-            </div>
-         
-        </div>
-
+    <div class="col-md-12 col-centered">
+        <h3 class="titulo">MerdoChat</h3>
     </div>
 
+    <div class="container">
+        <div class="row">
+                <div class="col-md-8 chat col-centered">
+                    <div class="col-md-12 chat-area-interna"></div>
+                </div>
+    
+                <div class="col-md-8 textarea col-centered">
+                    <textarea name="" id="textarea" placeholder="Escreva aqui..."></textarea>
+                </div>
+        </div>
+    </div>
 
 <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 <script
@@ -140,7 +155,7 @@
         var email = prompt('Digite o seu E-mail');
         localStorage.setItem('user', usuario);
 
-        if (usuario != '' && email != '') {
+        if (usuario != '' && email != '' && usuario != null && email != null) {
             var gravatar = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(email)+'?s=30';
             localStorage.setItem('email', gravatar);
 
