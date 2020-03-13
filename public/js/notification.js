@@ -17,8 +17,6 @@ Notification.requestPermission().then(function(result) {
     }
 
     navigator.serviceWorker.register('sw.js');
-
-   
 });
 
 function showNotification(message) {
