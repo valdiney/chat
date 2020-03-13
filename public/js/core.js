@@ -1,3 +1,4 @@
+// Se não existir usuario no localStorage, mostra a div de cadastro
 if (localStorage.getItem('user')) {
     $(".chat").show();
     $(".textarea").show();
@@ -31,11 +32,16 @@ $("#textarea").keypress(function(e) {
             'hora': data.getHours()+":"+data.getMinutes()
         }
 
-        firebase.database().ref("chat").push(body);
+        if ($("#textarea").val().length > 2) {
+            firebase.database().ref("chat").push(body);
+        } else {
+            console.log('Digite algo...');
+        }
+    
         $("#textarea").val('');
         $("#textarea").focus();
         
-        // Remove as divs mas mensagens
+        // Remove as divs das mensagens
         $(".chat-area-interna").remove('.divMsg');
     }
 });
@@ -70,7 +76,8 @@ function mensagens() {
        
         html += "</div>";
         document.querySelector(".chat-area-interna").innerHTML += html;
-
+        
+        // Abaixo o Scroll quando uma mensagem chega ou é enviada
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
     });
