@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <title>Document</title>
 
     <style>
@@ -72,9 +73,18 @@
 
             display:block;
             float:left;
-            border:1px solid #33ff99;
+            border:2px solid #33ff99;
             padding:3px;
             background:white;
+
+            font-size:30px;
+            display:block;
+            opacity:0.80;
+        }
+        .outroUsuario  {
+            border:2px solid #ff6633;
+            background:#ffcccc;
+            opacity:1.80;
         }
         .hora {
             text-align: right;
@@ -103,20 +113,7 @@
             margin: 0 auto;
         }
 
-        li {
-            list-style:none;
-            display: block;
-            background:white;
-            padding:10px;
-            padding-bottom:30px;
-            border-radius:5px;
-            margin-bottom:10px;
-            float:right;
         
-        }
-        .outroUsuario img {
-            background:#33ff99;
-        }
 
         nomeUsuario {
             font-weight:bold;
@@ -204,7 +201,7 @@
         localStorage.setItem('user', usuario);
 
         if (usuario != '' && email != '' && usuario != null && email != null) {
-            var gravatar = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(email)+'?s=30';
+            //var gravatar = 'http://www.gravatar.com/avatar/'+CryptoJS.MD5(email)+'?s=30';
             localStorage.setItem('email', gravatar);
 
             location.reload();
@@ -244,20 +241,21 @@
         if (snapshot.val().user != localStorage.getItem('user')) {
             outroUsuario = true;
         }
+        
+        if (outroUsuario) {
+            var img = "<i class='fas fa-meh-rolling-eyes img_perfil outroUsuario'></i>";
+        } else {
+            var img = "<i class='fas fa-flushed img_perfil'></i>";
+        }
 
-        var img = "<img class='img_perfil' src='"+snapshot.val().img+"'/>";
+        
+        
         var hora = snapshot.val().hora+"h";
         var id = snapshot.key;
 
-      
-        
         var html = "";
-        if (outroUsuario) {
-           html += "<div class='outroUsuario divMsg'>";
-        } else {
-            html += "<div class='divMsg'>";
-        }
-        
+        html += "<div class='divMsg'>";
+      
         html += img;
         html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
         
