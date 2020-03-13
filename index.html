@@ -36,7 +36,7 @@
             border-radius:10px;
             overflow-y: auto;
             padding-top:10px;
-            background-image: url('https://i.pinimg.com/236x/94/65/d3/9465d39cbdcee717aa6062bc1cc144d8.jpg');
+            /*background-image: url('https://i.pinimg.com/236x/94/65/d3/9465d39cbdcee717aa6062bc1cc144d8.jpg');*/
         }
         .enviar {
             margin-top:20px;
@@ -60,15 +60,21 @@
             padding-right:20px;
             margin-top:5px;
         }
-        .naoSouEu {
+        /*.naoSouEu {
             background:#faf6f6!important;
             color:#003366;
             float:left!important;
             border:1px solid #339966;
-        }
+        }*/
         .img_perfil {
             border-radius:50%;
             margin-right:10px;
+
+            display:block;
+            float:left;
+            border:1px solid #33ff99;
+            padding:3px;
+            background:white;
         }
         .hora {
             text-align: right;
@@ -95,6 +101,48 @@
         .col-centered {
             float: none;
             margin: 0 auto;
+        }
+
+        li {
+            list-style:none;
+            display: block;
+            background:white;
+            padding:10px;
+            padding-bottom:30px;
+            border-radius:5px;
+            margin-bottom:10px;
+            float:right;
+        
+        }
+        .outroUsuario img {
+            background:#33ff99;
+        }
+
+        nomeUsuario {
+            font-weight:bold;
+            display:block;
+            text-align:left;
+            margin-bottom:5px;
+            text-transform: capitalize;
+            margin-left:50px;
+        }
+
+        mensagem {
+            display:block;
+            opacity:0.90;
+            width:350px;
+            margin-left:50px;
+        }
+
+        hora {
+            text-align:right;
+            font-size:13px;
+            display:block;
+        }
+
+        .divMsg {
+            border-bottom:1px dotted silver;
+            padding:10px;
         }
     </style>
 </head>
@@ -189,22 +237,50 @@
 
   function mensagens() {
     var ref = firebase.database().ref("chat");
+
+    
     ref.on("child_added", function(snapshot) {
+        var outroUsuario = false;
+        if (snapshot.val().user != localStorage.getItem('user')) {
+            outroUsuario = true;
+        }
+
         var img = "<img class='img_perfil' src='"+snapshot.val().img+"'/>";
         var hora = snapshot.val().hora+"h";
+        var id = snapshot.key;
+
       
-        if (snapshot.val().user != localStorage.getItem('user')) {
-            $("<div class='msg naoSouEu'>"+img+"<b>"+snapshot.val().user+"</b> <br><texto>"+snapshot.val().msg+"</texto><span class='hora'>"+hora+"</span></div><div style='clear: both'></div>'").appendTo(".chat-area-interna"); 
+        
+        var html = "";
+        if (outroUsuario) {
+           html += "<div class='outroUsuario divMsg'>";
         } else {
-            $("<div class='msg'>"+img+"<b>"+snapshot.val().user+"</b> <br><texto>"+snapshot.val().msg+"</texto><span class='hora'>"+hora+"</span></div><div style='clear: both'></div>'").appendTo(".chat-area-interna"); 
-        } 
+            html += "<div class='divMsg'>";
+        }
+        
+        html += img;
+        html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
+        
+        html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
+        html += "<hora>"+hora+"</hora>";
+       
+        html += "</div>";
+        document.querySelector(".chat-area-interna").innerHTML += html;
 
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
     });
   }
 
+
+
+
+ /*if (snapshot.val().user != localStorage.getItem('user')) {
+            $("<div id='"+id+"' class='msg naoSouEu'>"+img+"<b>"+snapshot.val().user+"</b> <br><texto>"+snapshot.val().msg+"</texto><span class='hora'>"+hora+"</span></div><div style='clear: both'></div>'").appendTo(".chat-area-interna"); 
+        } else {
+            $("<div id='"+id+"' class='msg'>"+img+"<b>"+snapshot.val().user+"</b> <br><texto>"+snapshot.val().msg+"</texto><span class='hora'>"+hora+"</span></div><div style='clear: both'></div>'").appendTo(".chat-area-interna"); 
+        } */
 </script>
     
-</body>
+</body>   
 </html>
