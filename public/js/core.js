@@ -116,7 +116,7 @@ function ultimaMensagemEnviadaPorQualquerUsuario() {
     .on("child_added", function(snapshot) {
         // Bipa
         if (snapshot.val().user != localStorage.getItem('user')) {
-            beep(999, 220, 300);
+            beep(5);
         } 
     });
 }
@@ -162,21 +162,14 @@ function teste() {
     });
 }
 
+function beep(x) {
+    var context = new AudioContext();
+    var oscillator = context.createOscillator();
+    var contextGain = context.createGain();
+  
+    oscillator.connect(contextGain);
+    contextGain.connect(context.destination);
+    oscillator.start(0);
 
-
-
-
-
-// Emite um Beep
-a=new AudioContext()
-function beep(vol, freq, duration){
-  v=a.createOscillator()
-  u=a.createGain()
-  v.connect(u)
-  v.frequency.value=freq
-  v.type="square"
-  u.connect(a.destination)
-  u.gain.value=vol*0.01
-  v.start(a.currentTime)
-  v.stop(a.currentTime+duration*0.001)
+    contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x)
 }
