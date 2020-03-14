@@ -82,3 +82,10 @@ function mensagens() {
         div.prop("scrollTop", div.prop("scrollHeight"));
     });
   }
+
+
+$("tituloNomeUsuario").html(localStorage.getItem('user'));
+
+var altura = window.innerHeight;
+document.querySelector(".chat, .chat-area-interna").style.height = (altura - 64)+"px";
+document.querySelector(".chat-area-interna").style.height = (altura - 90)+"px";

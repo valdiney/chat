@@ -21,30 +21,27 @@
 
     <style>
         body {
-            background:#53748a;
+            background:white;
             margin:0;
             padding:0;
+            background: #f0f0f0!important;
         }
         textarea {
             width:100%;
-            border-radius:10px;
-            background:#e9e5e5;
+            border-radius:30px;
+            outline:none;
+            border:0;
+            margin-top:5px!important;
         }
         .textarea {
-            display:none;
-            outline:none;
+            background:#d8d7d7;
         }
         .chat {
-            min-height:600px;
-            padding-top:20px;
             display:none;
         }
         .chat-area-interna {
-            min-height:600px;
-            max-height:600px;
             background:white;
             margin-bottom:20px;
-            border-radius:10px;
             overflow-y: auto;
             padding-top:10px;
         }
@@ -110,10 +107,17 @@
             display:block;
         }
         .divMsg {
-            border-bottom:1px dotted silver;
+            border-bottom:1px solid #f2f2f2;
             padding:10px;
         }
-    </style>
+        tituloNomeUsuario {
+            color:#525252;
+            font-weight:bold;
+            background:#d8d7d7;
+            display:block;
+            padding-left:10px;
+        }
+ </style>
 </head>
 <body>
     <div class="jumbotron" align="center">
@@ -125,30 +129,30 @@
           <button class="btn btn-primary btn-lg entrar" href="#" role="button">Entrar nessa porra!</button>
         </p>
     </div>
-
-    <!--<div class="col-md-12 col-centered">
-        <h3 class="titulo">MerdoChat</h3>
-    </div>-->
+    
 
     <div class="container">
+  
         <div class="row">
-            <div class="col-md-8 chat col-centered">
+            <div class="col-md-8 chat col-centered" style="background:#e4e4e4;">
+                <tituloNomeUsuario>Valdiney</tituloNomeUsuario>
                 <!--Div que recebe as mensagens-->
                 <div class="col-md-12 chat-area-interna"></div>
             </div>
 
-            <div class="col-md-8 textarea col-centered">
-                <textarea  id="textarea" placeholder="Escreva aqui..."></textarea>
+            <div class="col-md-8 textarea col-centered"">
+                <textarea  id="textarea" placeholder="Escreva uma mensagem"></textarea>
             </div>
         </div>
     </div>
+
 
 <!-- Js files-->
 <script src="public/js/firebase.js"></script>
 <script src="public/js/jquery.js"></script>
 <script src="public/js/firebaseConfig.js"></script>
 <script src="public/js/core.js"></script>
-<script src="public/js/notification.js"></script>
+<!--<script src="public/js/notification.js"></script>-->
 
 </body>   
 </html>
