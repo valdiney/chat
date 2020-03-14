@@ -1,2 +1,2 @@
-# chat
-Trying to create a simle chat with js and Google Firebase
+# MerdoChat
+Trying to create a simple chat with JS and Google Firebase
