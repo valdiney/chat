@@ -43,7 +43,8 @@ $("#textarea").keypress(function(e) {
             'user': localStorage.getItem('user'),
             'msg' : $("#textarea").val(),
             'hora': data.getHours()+":"+data.getMinutes(),
-            'dia' : data.getDate(),
+            'dia' : data.getDay(),
+            'data': data.getDate(),
             'mes' : data.getMonth()
         }
 
@@ -89,10 +90,15 @@ function mensagens() {
         
         html += img;
         html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
-        
         html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
-        html += "<hora>"+hora+"</hora>";
-       
+        
+        var data = new Date();
+        if (data.getDate() == snapshot.val().data) {
+           html += "<hora>"+hora+" hoje</hora>";
+        } else {
+            html += "<hora>"+hora+" dia "+snapshot.val().data+"</hora>";
+        }
+
         html += "</div>";
         document.querySelector(".chat-area-interna").innerHTML += html;
         
@@ -109,12 +115,11 @@ function ultimaMensagemEnviadaPeloUsuario() {
     ref.orderByChild("user").equalTo(localStorage.getItem('user')).limitToLast(1)
     .on("child_added", function(snapshot) {
 
-        html = localStorage.getItem('user');
+        var html = localStorage.getItem('user');
         html += ": <small>Ultima mensagem: " + snapshot.val().hora + "h";
         html += " de " + mesesPorExtenso(snapshot.val().mes) + "</small>";
 
         $("tituloNomeUsuario").html(html);
-       
     });
 }
 
@@ -157,11 +162,6 @@ function mesesPorExtenso(mes) {
 
     return $arrayMes[mes];
 }
-
-
-
-
-
 
 function teste() {
     var ref = firebase.database().ref("chat");
