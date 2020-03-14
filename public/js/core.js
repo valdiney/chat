@@ -19,12 +19,18 @@ $(".entrar").click(function() {
 
 firebase.initializeApp(config);
 
+var loading = "<center><h1 class='carregando'>Carregando Mensagens...</h1></center>";
+loading += "<center><i class='fas fa-comment balaoLoad'></i></center>";
+$(".chat-area-interna").html(loading);
+
+
 // Carrega as mensagens assim que a página é carregada
 mensagens();
 
 // Mostra a ultima mensagem enviada pelo usuário
 ultimaMensagemEnviadaPeloUsuario();
 
+// Bipa se chegar mensagem nova
 ultimaMensagemEnviadaPorQualquerUsuario();
 
 // Envia a mensagem para o Firebase
