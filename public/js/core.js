@@ -19,13 +19,15 @@ $(".entrar").click(function() {
 
 firebase.initializeApp(config);
 
-var loading = "<center><h1 class='carregando'>Carregando Mensagens...</h1></center>";
-loading += "<center><i class='fas fa-comment balaoLoad'></i></center>";
+var loading = "<center class='load'><h1 class='carregando'>Carregando Mensagens...</h1></center>";
+loading += "<center class='load'><i class='fas fa-comment balaoLoad'></i></center>";
 $(".chat-area-interna").html(loading);
-
 
 // Carrega as mensagens assim que a página é carregada
 mensagens();
+
+// Remove o load
+$(".load").hide();
 
 // Mostra a ultima mensagem enviada pelo usuário
 ultimaMensagemEnviadaPeloUsuario();
@@ -63,7 +65,7 @@ $("#textarea").keypress(function(e) {
 function mensagens() {
     var ref = firebase.database().ref("chat");
 
-    ref.on("child_added", function(snapshot) {
+    ref.limitToLast(30).on("child_added", function(snapshot) {
         var outroUsuario = false;
         if (snapshot.val().user != localStorage.getItem('user')) {
             outroUsuario = true;
@@ -108,7 +110,7 @@ function ultimaMensagemEnviadaPeloUsuario() {
     .on("child_added", function(snapshot) {
 
         html = localStorage.getItem('user');
-        html += " <small>Ultima mensagem: " + snapshot.val().hora + "h";
+        html += ": <small>Ultima mensagem: " + snapshot.val().hora + "h";
         html += " de " + mesesPorExtenso(snapshot.val().mes) + "</small>";
 
         $("tituloNomeUsuario").html(html);
