@@ -21,10 +21,9 @@
 
     <style>
         body {
-            background:white;
             margin:0;
             padding:0;
-            background: #f0f0f0!important;
+            background:#333333!important;
         }
         textarea {
             width:100%;
@@ -35,12 +34,13 @@
         }
         .textarea {
             background:#d8d7d7;
+            display:none;
         }
         .chat {
             display:none;
         }
         .chat-area-interna {
-            background:white;
+            background:#333333;
             margin-bottom:20px;
             overflow-y: auto;
             padding-top:10px;
@@ -60,6 +60,23 @@
             font-size:30px;
             display:block;
             opacity:0.80;
+        }
+        .divMsg {
+            border-bottom:1px solid #f2f2f2;
+            padding:10px;
+            border:1px solid #d6d6d6;
+            border-radius:30px!important;
+            margin-right:50px;
+            margin-bottom:5px;
+            background:white;
+        }
+        .divMsgEu {
+            margin-left:50px;
+            background:#f7f7f7;
+            border-radius:30px!important;
+            border:1px solid #d6d6d6;
+            margin-right:0px;
+            background:#f0fde6;
         }
         .outroUsuario  {
             border:2px solid #ff6633;
@@ -106,10 +123,6 @@
             font-size:13px;
             display:block;
         }
-        .divMsg {
-            border-bottom:1px solid #f2f2f2;
-            padding:10px;
-        }
         tituloNomeUsuario {
             color:#525252;
             font-weight:bold;
@@ -130,22 +143,19 @@
         </p>
     </div>
     
-
     <div class="container">
-  
         <div class="row">
             <div class="col-md-8 chat col-centered" style="background:#e4e4e4;">
-                <tituloNomeUsuario>Valdiney</tituloNomeUsuario>
+                <tituloNomeUsuario>...</tituloNomeUsuario>
                 <!--Div que recebe as mensagens-->
                 <div class="col-md-12 chat-area-interna"></div>
             </div>
 
-            <div class="col-md-8 textarea col-centered"">
+            <div class="col-md-8 textarea col-centered">
                 <textarea  id="textarea" placeholder="Escreva uma mensagem"></textarea>
             </div>
         </div>
     </div>
-
 
 <!-- Js files-->
 <script src="public/js/firebase.js"></script>

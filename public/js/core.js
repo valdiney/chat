@@ -22,14 +22,21 @@ firebase.initializeApp(config);
 // Carrega as mensagens assim que a página é carregada
 mensagens();
 
+// Mostra a ultima mensagem enviada pelo usuário
+ultimaMensagemEnviadaPeloUsuario();
+
+ultimaMensagemEnviadaPorQualquerUsuario();
+
 // Envia a mensagem para o Firebase
 $("#textarea").keypress(function(e) {
     if (e.which == 13 && $("#textarea").val() != '') {
         var data = new Date();
         var body = {
             'user': localStorage.getItem('user'),
-            'msg': $("#textarea").val(),
-            'hora': data.getHours()+":"+data.getMinutes()
+            'msg' : $("#textarea").val(),
+            'hora': data.getHours()+":"+data.getMinutes(),
+            'dia' : data.getDate(),
+            'mes' : data.getMonth()
         }
 
         if ($("#textarea").val().length > 2) {
@@ -66,8 +73,12 @@ function mensagens() {
         var id = snapshot.key;
 
         var html = "";
-        html += "<div class='divMsg'>";
-      
+        if ( ! outroUsuario) {
+           html += "<div class='divMsg divMsgEu'>";
+        } else {
+            html += "<div class='divMsg'>";
+        }
+        
         html += img;
         html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
         
@@ -80,12 +91,92 @@ function mensagens() {
         // Abaixo o Scroll quando uma mensagem chega ou é enviada
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
+
     });
-  }
+}
 
+// Retorna a ultima mensagem enviada pelo usuário
+function ultimaMensagemEnviadaPeloUsuario() {
+    var ref = firebase.database().ref("chat");
+    ref.orderByChild("user").equalTo(localStorage.getItem('user')).limitToLast(1)
+    .on("child_added", function(snapshot) {
 
-$("tituloNomeUsuario").html(localStorage.getItem('user'));
+        html = localStorage.getItem('user');
+        html += " <small>Ultima mensagem: " + snapshot.val().hora + "h";
+        html += " de " + mesesPorExtenso(snapshot.val().mes) + "</small>";
 
+        $("tituloNomeUsuario").html(html);
+       
+    });
+}
+
+function ultimaMensagemEnviadaPorQualquerUsuario() {
+    var ref = firebase.database().ref("chat");
+    ref.limitToLast(1)
+    .on("child_added", function(snapshot) {
+        // Bipa
+        if (snapshot.val().user != localStorage.getItem('user')) {
+            beep(999, 220, 300);
+        } 
+    });
+}
+
+// Mantem o container chat com a mesma altura do navegador
 var altura = window.innerHeight;
 document.querySelector(".chat, .chat-area-interna").style.height = (altura - 64)+"px";
 document.querySelector(".chat-area-interna").style.height = (altura - 90)+"px";
+
+// Contem os mesmes por extenso
+function mesesPorExtenso(mes) {
+    $arrayMes = [
+        'Janeiro',
+        'Ferereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro'
+    ];
+    
+    if (mes == 1) {
+        mes = 0;
+    }
+
+    return $arrayMes[mes];
+}
+
+
+
+
+
+
+function teste() {
+    var ref = firebase.database().ref("chat");
+    ref.orderByChild("user").equalTo(localStorage.getItem('user')).on("child_added", function(snapshot) {
+      console.log(snapshot.val().msg);
+    });
+}
+
+
+
+
+
+
+// Emite um Beep
+a=new AudioContext()
+function beep(vol, freq, duration){
+  v=a.createOscillator()
+  u=a.createGain()
+  v.connect(u)
+  v.frequency.value=freq
+  v.type="square"
+  u.connect(a.destination)
+  u.gain.value=vol*0.01
+  v.start(a.currentTime)
+  v.stop(a.currentTime+duration*0.001)
+}
