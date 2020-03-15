@@ -45,7 +45,8 @@ $("#textarea").keypress(function(e) {
             'hora': data.getHours()+":"+data.getMinutes(),
             'dia' : data.getDay(),
             'data': data.getDate(),
-            'mes' : data.getMonth()
+            'mes' : data.getMonth(),
+            'likes' : 0
         }
 
         if ($("#textarea").val().length > 2) {
@@ -90,8 +91,15 @@ function mensagens() {
         
         html += img;
         html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
-        html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
         
+        if (snapshot.val().likes > 0) {
+            html += "<small class='curtir curtido' id='"+snapshot.key+"'><i class='fas fa-heart'></i></small>";
+        } else {
+            html += "<small  class='curtir' id='"+snapshot.key+"'><i class='fas fa-heart'></i></small>";
+        }
+
+        html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
+
         var data = new Date();
         if (data.getDate() == snapshot.val().data) {
            html += "<hora>"+hora+" hoje</hora>";
@@ -105,6 +113,31 @@ function mensagens() {
         // Abaixo o Scroll quando uma mensagem chega ou é enviada
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
+
+
+        $('.curtir').each(function() {
+            $(this).click(function() {
+                var id = $(this).attr('id');
+
+                var ref = firebase.database().ref("chat/"+id+"/likes");
+                var atual = firebase.database().ref("chat/"+id);
+                var likes = 0
+                atual.once('value', function(snapshot) {
+                    likes = snapshot.val().likes;
+                });
+
+
+                var dadosDoCurtir = {
+                    'usuario': localStorage.getItem('user')
+                }
+
+                ref.push(dadosDoCurtir);
+
+                //ref.update({likes:likes + 1});
+
+
+            });
+        });
 
     });
 }
@@ -162,6 +195,25 @@ function mesesPorExtenso(mes) {
 
     return $arrayMes[mes];
 }
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function teste() {
     var ref = firebase.database().ref("chat");
