@@ -136,7 +136,7 @@ function ultimaMensagemEnviadaPorQualquerUsuario() {
 
 // Mantem o container chat com a mesma altura do navegador
 var altura = window.innerHeight;
-document.querySelector(".chat, .chat-area-interna").style.height = (altura - 70)+"px";
+document.querySelector(".chat").style.height = (altura - 70)+"px";
 document.querySelector(".chat-area-interna").style.height = (altura - 90)+"px";
 
 // Contem os mesmes por extenso
