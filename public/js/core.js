@@ -204,7 +204,7 @@ var loggedUser;
     $('#buttton-auth').click(function () {
         var email = "valdiney.2@hotmail.com",
             password = "33473347";
-        var provider = new firebase.auth.EmailAuthProvider();
+        var provider = new firebase.auth.EmailAuthProvider.credential(email, password);
         provider.addScope('user');
         firebase.auth().signInWithPopup(provider).then(function (result) {
             console.log('firebase.auth.signInWithPopup > user', result.user);
