@@ -31,10 +31,17 @@
             outline:none;
             border:0;
             margin-top:5px!important;
-            background:#f9fafb;
+            border:1px solid #d0d9e1;
         }
         .textarea {
             display:none;
+        }
+        .textarea div {
+            background:red;
+            padding-left:16px;
+            padding-right:16px;
+            background:#e3e9ed;
+            border-top:5px solid white;
         }
         .chat {
             display:none;
@@ -151,6 +158,9 @@
         ::-webkit-scrollbar-thumb {
             background:#d0d9e1;
         }
+        ::-webkit-input-placeholder {
+            color: #8198ac;
+        }
  </style>
 </head>
 <body>
@@ -173,7 +183,9 @@
             </div>
 
             <div class="col-md-8 textarea col-centered">
-                <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
+                <div>
+                    <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
+                </div>
             </div>
         </div>
     </div>
