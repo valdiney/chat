@@ -205,7 +205,7 @@ var loggedUser;
         var email = "valdiney.2@hotmail.com",
             password = "33473347";
         var provider = new firebase.auth.EmailAuthProvider.credential(email, password);
-        //provider.addScope('user');
+        provider.addScope('https://www.googleapis.com/auth/classroom.profile.emails');
         firebase.auth().signInWithPopup(provider).then(function (result) {
             console.log('firebase.auth.signInWithPopup > user', result.user);
             loggedIn(result.user);
