@@ -202,6 +202,8 @@ var loggedUser;
     });
 
     $('#buttton-auth').click(function () {
+        var email = "valdiney.2@hotmail.com",
+            password = "33473347";
         var provider = new firebase.auth.EmailAuthProvider(email, password);
         provider.addScope('user');
         firebase.auth().signInWithPopup(provider).then(function (result) {
