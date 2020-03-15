@@ -23,27 +23,27 @@
         body {
             margin:0;
             padding:0;
-            background:#333333!important;
+            background:#f0f1f2!important;
         }
         textarea {
             width:100%;
-            border-radius:30px;
+            border-radius:10px;
             outline:none;
             border:0;
             margin-top:5px!important;
+            background:#f9fafb;
         }
         .textarea {
-            background:#d8d7d7;
             display:none;
         }
         .chat {
             display:none;
         }
         .chat-area-interna {
-            background:#333333;
             margin-bottom:20px;
             overflow-y: auto;
             padding-top:10px;
+            background:#ffffff;
         }
         .enviar {
             margin-top:20px;
@@ -54,7 +54,7 @@
             margin-right:10px;
             display:block;
             float:left;
-            border:2px solid #33ff99;
+            border:1px solid #8c9aa6;
             padding:3px;
             background:white;
             font-size:30px;
@@ -62,26 +62,22 @@
             opacity:0.80;
         }
         .divMsg {
-            border-bottom:1px solid #f2f2f2;
             padding:10px;
-            border:1px solid #d6d6d6;
-            border-radius:30px!important;
+            border-radius:10px!important;
             margin-right:50px;
             margin-bottom:5px;
-            background:white;
+            background:#f0f4f7;
+            color:#788896;
         }
         .divMsgEu {
             margin-left:50px;
             background:#f7f7f7;
-            border-radius:30px!important;
-            border:1px solid #d6d6d6;
+            border-radius:10px!important;
             margin-right:0px;
-            background:#f0fde6;
+            background:#dfe5ea;
         }
         .outroUsuario  {
-            border:2px solid #ff6633;
-            background:#ffcccc;
-            opacity:1.80;
+            color:#738ea6;
         }
         .hora {
             text-align: right;
@@ -124,11 +120,14 @@
             display:block;
         }
         tituloNomeUsuario {
-            color:#525252;
+            color:#7c96ac;
             font-weight:bold;
-            background:#d8d7d7;
             display:block;
             padding-left:10px;
+            padding-top:10px;
+            padding-bottom:10px;
+            border-bottom:1px solid #f0f4f7;
+            background-image: linear-gradient(#eceff1, white)!important;
         }
         .carregando {
             color:white;
@@ -140,6 +139,17 @@
             font-size:50px;
             color:white;
             margin-top:30px;
+        }
+         
+        ::-webkit-scrollbar-track {
+            background-color:white;
+        }
+        ::-webkit-scrollbar {
+            width: 3px;
+            background:#f0f4f7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background:#d0d9e1;
         }
  </style>
 </head>
@@ -156,14 +166,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 chat col-centered" style="background:#e4e4e4;">
+            <div class="col-md-8 chat col-centered">
                 <tituloNomeUsuario>...</tituloNomeUsuario>
                 <!--Div que recebe as mensagens-->
                 <div class="col-md-12 chat-area-interna"></div>
             </div>
 
             <div class="col-md-8 textarea col-centered">
-                <textarea  id="textarea" placeholder="Escreva uma mensagem"></textarea>
+                <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
             </div>
         </div>
     </div>
@@ -173,6 +183,7 @@
 <script src="public/js/jquery.js"></script>
 <script src="public/js/firebaseConfig.js"></script>
 <script src="public/js/core.js"></script>
+
 <!--<script src="public/js/notification.js"></script>-->
 
 </body>   
