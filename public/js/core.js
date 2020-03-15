@@ -181,3 +181,41 @@ function beep(x) {
 
     contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x)
 }
+
+
+
+
+
+
+
+var loggedUser;
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        loggedUser = user;
+        console.log('firebase.auth.onAuthStateChanged > user', user);
+        if (user == null) {
+            $('#div-must-auth').show(400);
+        } else {
+            $('#div-must-auth').hide(200);
+            loggedIn(user);
+        }
+    });
+
+    $('#buttton-auth').click(function () {
+        var provider = new firebase.auth.GithubAuthProvider();
+        provider.addScope('user');
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+            console.log('firebase.auth.signInWithPopup > user', result.user);
+            loggedIn(result.user);
+        }).catch(function (error) {
+            console.log('error', error);
+            alert(error.message);
+        });
+    });
+
+
+    function loggedIn(user) {
+        writeUserData(user.uid, user.displayName, user.photoURL);
+        startChat();
+        setPresence(user);
+    }
