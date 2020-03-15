@@ -202,7 +202,7 @@ var loggedUser;
     });
 
     $('#buttton-auth').click(function () {
-        var provider = new firebase.auth.EmailAuthProvider();
+        var provider = new firebase.auth.EmailAuthProvider(email, password);
         provider.addScope('user');
         firebase.auth().signInWithPopup(provider).then(function (result) {
             console.log('firebase.auth.signInWithPopup > user', result.user);
