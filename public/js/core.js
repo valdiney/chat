@@ -181,3 +181,8 @@ function beep(x) {
 
     contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x)
 }
+
+
+$("#show-icons").click(function() {
+    $("#modal-icons").modal();
+})

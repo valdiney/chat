@@ -168,9 +168,40 @@
         ::-webkit-input-placeholder {
             color: #8198ac;
         }
+
+        .body-modal-icons i {
+            display:block;
+            padding:10px;
+            border:1px solid #ff9999;
+            border-radius:2px;
+            font-size:50px;
+            float:left;
+            margin-left:3px;
+        }
  </style>
 </head>
 <body>
+
+    <div id="modal-icons" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body body-modal-icons">
+                <i class="fas fa-smile-wink"></i>
+                <i class="fas fa-thumbs-up"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+           
+          </div>
+      
+        </div>
+      </div>
+
     <div class="jumbotron" align="center">
         <h1 class="display-4">MerdoChat</h1>
         <p class="lead">O chat mais merda que você verá hoje!</p>
@@ -191,6 +222,9 @@
 
             <div class="col-md-8 textarea col-centered">
                 <div>
+                    <div class="col-md-8 chat col-centered bottom-tools">
+                        <i class="fas fa-smile-wink" style="font-size:20px;" id="show-icons"></i>
+                    </div>
                     <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
                 </div>
             </div>
@@ -200,8 +234,10 @@
 <!-- Js files-->
 <script src="public/js/firebase.js"></script>
 <script src="public/js/jquery.js"></script>
+<script src="public/js/boostrap.js"></script>
 <script src="public/js/firebaseConfig.js"></script>
 <script src="public/js/core.js"></script>
+
 
 <!--<script src="public/js/notification.js"></script>-->
 
