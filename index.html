@@ -227,6 +227,15 @@
         #show-icons:hover {
             opacity:0.80;
         }
+
+        mensagem img {
+            width:100%;
+            display:block;
+            border:5px solid white;
+            border-radius:3px;
+            padding:3px;
+            background:#8c9aa6;
+        }
  </style>
 </head>
 <body>
@@ -270,8 +279,10 @@
                    onclick="mandarIcone('fas fas fa-angry')">
                 </i>
             </div>
+
+            <progress value="0" max="100" id="uploader">0%</progress>
             <input type="file" name="img" id="img"><br>
-            <button id="enviar_imagem">Enviar</button>
+
           </div>
       
         </div>

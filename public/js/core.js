@@ -103,6 +103,10 @@ function mensagens() {
         } else {
             html += "<mensagem><i class='"+snapshot.val().icone+" mensagem-tipo-icone'></i></mensagem>";
         }
+
+        if (snapshot.val().imagem !== undefined) {
+            html += "<mensagem><img src='"+snapshot.val().imagem+"'/></mensagem>";
+        }
         
         var data = new Date();
         if (data.getDate() == snapshot.val().data) {
