@@ -6,3 +6,5 @@ var config = {
     storageBucket: "teste-chat-16f85.appspot.com",
     messagingSenderId: "G-K9C9PCBKFZ"
 };
+
+firebase.initializeApp(config);
