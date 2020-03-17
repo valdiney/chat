@@ -90,13 +90,6 @@ function mensagens() {
         html += img;
         html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
         
-        /*if (snapshot.val().likes > 0) {
-            html += "<small class='curtir curtido' id='"+snapshot.key+"'><i class='fas fa-heart'></i></small>";
-        } else {
-            html += "<small  class='curtir' id='"+snapshot.key+"'><i class='fas fa-heart'></i></small>";
-        }*/
-
-        
         if (snapshot.val().icone == undefined) {
             html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
             
@@ -104,8 +97,14 @@ function mensagens() {
             html += "<mensagem><i class='"+snapshot.val().icone+" mensagem-tipo-icone'></i></mensagem>";
         }
 
-        if (snapshot.val().imagem !== undefined) {
-            html += "<mensagem><img src='"+snapshot.val().imagem+"'/></mensagem>";
+        // Verificar se a string é jpg ou png ou video ou audio...
+        var file = snapshot.val().imagem;
+        if (file !== undefined) {
+            if (file.indexOf('mp3') != -1) {
+                html += "<video controls='' autoplay='' name='media'><source src='"+snapshot.val().imagem+"' type='audio/mp3'></video>";
+            } else {
+                html += "<mensagem><img src='"+snapshot.val().imagem+"'/></mensagem>";
+            }
         }
         
         var data = new Date();
@@ -121,7 +120,6 @@ function mensagens() {
         // Abaixo o Scroll quando uma mensagem chega ou é enviada
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
-
 
         $('.curtir').each(function() {
             $(this).click(function() {
