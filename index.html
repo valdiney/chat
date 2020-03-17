@@ -179,6 +179,11 @@
             margin-left:3px;
         }
 
+        .mandar-icone:hover {
+            background:#8ba2b6;
+            color:white;
+        }
+
         .icons {
             margin-left:10px;
             margin-top:10px;
@@ -188,15 +193,25 @@
         }
 
         .fa-thumbs-up {
-            color:#ff99cc;
+            color:#9999ff;
         }
         .fa-heart {
             color:#ff0066;
         }
         .fa-smile-wink {
-            color:#9999ff;
-
+            color:#ff99cc;
         }
+        .fa-thumbs-down {
+            color:#212529;
+        }
+
+        #show-icons {
+            color:#8ba2b6!important;
+        }
+        #show-icons:hover {
+            opacity:0.80;
+        }
+
  </style>
 </head>
 <body>
@@ -207,26 +222,30 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Icones</h4>
+              <h4 class="modal-title">Escolha um Icone</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+
             <div class="modal-body body-modal-icons">
-                <i class="fas fa-smile-wink mandar-icone" style="color:#9999ff" 
+                <i class="fas fa-smile-wink mandar-icone"
                    onclick="mandarIcone('fas fa-smile-wink')">
                 </i>
 
-                <i class="fas fa-thumbs-up mandar-icone" style="color:#ff99cc" 
+                <i class="fas fa-thumbs-up mandar-icone"
                    onclick="mandarIcone('fas fa-thumbs-up')">   
                 </i>
-                <i class="fas fa-heart mandar-icone" style="color:#ff0066" 
+                <i class="fas fa-heart mandar-icone"
                    onclick="mandarIcone('fas fa-heart')">
+                </i>
+                <i class="fas fa-thumbs-down mandar-icone"
+                   onclick="mandarIcone('fas fa-thumbs-down')">
                 </i>
             </div>
            
           </div>
       
         </div>
-      </div>
+    </div>
 
     <div class="jumbotron" align="center">
         <h1 class="display-4">MerdoChat</h1>
@@ -248,11 +267,7 @@
 
             <div class="col-md-8 textarea col-centered">
                 <div>
-
                     <i class="fas fa-smile-wink icons" style="font-size:20px;" id="show-icons"></i>
-                    
-                    
-
                     <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
                 </div>
             </div>
