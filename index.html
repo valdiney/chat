@@ -190,7 +190,7 @@
             margin-top:10px;
         }
         .mensagem-tipo-icone {
-            font-size:25px;
+            font-size:30px;
         }
 
         .fa-thumbs-up {
@@ -200,7 +200,7 @@
             color:#ff0066;
         }
         .fa-smile-wink {
-            color:#ff99cc;
+            color:#003399;
         }
         .fa-thumbs-down {
             color:#212529;
@@ -211,6 +211,15 @@
         .fa-apple-alt {
             color:#cc3333;
         }
+        .fa-grin-hearts {
+            color:#ff0099;
+        }
+        .fa-angry {
+            color:#000000;
+        }
+        .fa-kiss-wink-heart {
+            color:#ff6600;
+        }
 
         #show-icons {
             color:#8ba2b6!important;
@@ -218,7 +227,6 @@
         #show-icons:hover {
             opacity:0.80;
         }
-
  </style>
 </head>
 <body>
@@ -234,10 +242,6 @@
             </div>
 
             <div class="modal-body body-modal-icons">
-                <i class="fas fa-smile-wink mandar-icone"
-                   onclick="mandarIcone('fas fa-smile-wink')">
-                </i>
-
                 <i class="fas fa-thumbs-up mandar-icone"
                    onclick="mandarIcone('fas fa-thumbs-up')">   
                 </i>
@@ -253,6 +257,24 @@
                 <i class="fas fas fa-apple-alt mandar-icone"
                    onclick="mandarIcone('fas fas fa-apple-alt')">
                 </i>
+                <i class="fas fa-grin-hearts mandar-icone"
+                   onclick="mandarIcone('fas fa-grin-hearts')">
+                </i>
+                <i class="fas fas fa-kiss-wink-heart mandar-icone"
+                   onclick="mandarIcone('fas fas fa-kiss-wink-heart')">
+                </i>
+                <i class="fas fa-smile-wink mandar-icone"
+                   onclick="mandarIcone('fas fa-smile-wink')">
+                </i>
+                <i class="fas fas fa-angry mandar-icone"
+                   onclick="mandarIcone('fas fas fa-angry')">
+                </i>
+
+                
+
+          
+
+               
             </div>
            
           </div>
@@ -280,7 +302,7 @@
 
             <div class="col-md-8 textarea col-centered">
                 <div>
-                    <i class="fas fa-smile-wink icons" style="font-size:20px;" id="show-icons"></i>
+                    <i class="fas fa-smile-wink icons" style="font-size:20px;" id="show-icons" title="Icones"></i>
                     <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
                 </div>
             </div>
