@@ -32,7 +32,8 @@ fileButton.addEventListener('change', function(e) {
 		},
 
 		function complete() {
-			cadastrarImagem(file.name);
+            cadastrarImagem(file.name);
+            $("#modal-fotos").modal('hide');
 
 		}
 

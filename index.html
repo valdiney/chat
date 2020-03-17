@@ -231,10 +231,27 @@
         mensagem img {
             width:100%;
             display:block;
-            border:5px solid white;
             border-radius:3px;
             padding:3px;
             background:#8c9aa6;
+            border-radius:3px;
+        }
+
+        .opcoes {
+            font-size: 25px;
+            margin-right:20px;
+        }
+
+        input[type='file'] {
+            display: none
+        }
+        label {
+            background-color: #3498db;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+            padding: 6px 20px
         }
  </style>
 </head>
@@ -279,14 +296,37 @@
                    onclick="mandarIcone('fas fas fa-angry')">
                 </i>
             </div>
+          </div>
+      
+        </div>
+    </div>
 
-            <progress value="0" max="100" id="uploader">0%</progress>
-            <input type="file" name="img" id="img"><br>
+
+    <div id="modal-fotos" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Escolha uma foto</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body body-modal-icons">
+                <center><progress value="0" max="100" id="uploader">0%</progress></center>
+                
+            
+                <center>
+                    <label for="img">Selecione uma foto</i></label>
+                    <input type="file" name="img" id="img">
+                </center>
+            </div>
 
           </div>
       
         </div>
     </div>
+
 
     <div class="jumbotron" align="center">
         <h1 class="display-4">MerdoChat</h1>
@@ -308,7 +348,9 @@
 
             <div class="col-md-8 textarea col-centered">
                 <div>
-                    <i class="fas fa-smile-wink icons" style="font-size:20px;" id="show-icons" title="Icones"></i>
+                    <i class="fas fa-smile-wink icons opcoes" id="show-icons" title="Icones"></i>
+                    <i class="fas fa-camera opcoes" id="show-fotos" title="Fotos"></i>
+
                     <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
                 </div>
             </div>
@@ -337,11 +379,17 @@ function mandarIcone(icone) {
     }
 
     firebase.database().ref("chat").push(body);
+    $("#modal-icons").modal('hide');
 }
 
 jQuery("#show-icons").click(function() {
     $("#modal-icons").modal();
 })
+
+jQuery("#show-fotos").click(function() {
+    $("#modal-fotos").modal();
+})
+
 </script>
 
 <!--<script src="public/js/notification.js"></script>-->
