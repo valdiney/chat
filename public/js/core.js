@@ -17,8 +17,6 @@ $(".entrar").click(function() {
     }
 });
 
-firebase.initializeApp(config);
-
 var loading = "<center class='load'><h1 class='carregando'>Carregando Mensagens...</h1></center>";
 loading += "<center class='load'><i class='fas fa-comment balaoLoad'></i></center>";
 $(".chat-area-interna").html(loading);
@@ -45,7 +43,8 @@ $("#textarea").keypress(function(e) {
             'hora': data.getHours()+":"+data.getMinutes(),
             'dia' : data.getDay(),
             'data': data.getDate(),
-            'mes' : data.getMonth()
+            'mes' : data.getMonth(),
+            'likes' : 0
         }
 
         if ($("#textarea").val().length > 2) {
@@ -90,7 +89,20 @@ function mensagens() {
         
         html += img;
         html += "<nomeUsuario>"+snapshot.val().user+"</nomeUsuario>";
-        html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
+        
+        /*if (snapshot.val().likes > 0) {
+            html += "<small class='curtir curtido' id='"+snapshot.key+"'><i class='fas fa-heart'></i></small>";
+        } else {
+            html += "<small  class='curtir' id='"+snapshot.key+"'><i class='fas fa-heart'></i></small>";
+        }*/
+
+        
+        if (snapshot.val().icone == undefined) {
+            html += "<mensagem>"+snapshot.val().msg+"</mensagem>";
+            
+        } else {
+            html += "<mensagem><i class='"+snapshot.val().icone+" mensagem-tipo-icone'></i></mensagem>";
+        }
         
         var data = new Date();
         if (data.getDate() == snapshot.val().data) {
@@ -105,6 +117,31 @@ function mensagens() {
         // Abaixo o Scroll quando uma mensagem chega ou é enviada
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
+
+
+        $('.curtir').each(function() {
+            $(this).click(function() {
+                var id = $(this).attr('id');
+
+                var ref = firebase.database().ref("chat/"+id+"/likes");
+                var atual = firebase.database().ref("chat/"+id);
+                var likes = 0
+                atual.once('value', function(snapshot) {
+                    likes = snapshot.val().likes;
+                });
+
+
+                var dadosDoCurtir = {
+                    'usuario': localStorage.getItem('user')
+                }
+
+                ref.push(dadosDoCurtir);
+
+                //ref.update({likes:likes + 1});
+
+
+            });
+        });
 
     });
 }
@@ -163,6 +200,24 @@ function mesesPorExtenso(mes) {
     return $arrayMes[mes];
 }
 
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function teste() {
     var ref = firebase.database().ref("chat");
     ref.orderByChild("user").equalTo(localStorage.getItem('user')).on("child_added", function(snapshot) {
@@ -181,8 +236,3 @@ function beep(x) {
 
     contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x)
 }
-
-
-$("#show-icons").click(function() {
-    $("#modal-icons").modal();
-})
