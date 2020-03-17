@@ -178,6 +178,25 @@
             float:left;
             margin-left:3px;
         }
+
+        .icons {
+            margin-left:10px;
+            margin-top:10px;
+        }
+        .mensagem-tipo-icone {
+            font-size:25px;
+        }
+
+        .fa-thumbs-up {
+            color:#ff99cc;
+        }
+        .fa-heart {
+            color:#ff0066;
+        }
+        .fa-smile-wink {
+            color:#9999ff;
+
+        }
  </style>
 </head>
 <body>
@@ -188,13 +207,20 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
+              <h4 class="modal-title">Icones</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body body-modal-icons">
-                <i class="fas fa-smile-wink"></i>
-                <i class="fas fa-thumbs-up"></i>
-                <i class="fas fa-heart"></i>
+                <i class="fas fa-smile-wink mandar-icone" style="color:#9999ff" 
+                   onclick="mandarIcone('fas fa-smile-wink')">
+                </i>
+
+                <i class="fas fa-thumbs-up mandar-icone" style="color:#ff99cc" 
+                   onclick="mandarIcone('fas fa-thumbs-up')">   
+                </i>
+                <i class="fas fa-heart mandar-icone" style="color:#ff0066" 
+                   onclick="mandarIcone('fas fa-heart')">
+                </i>
             </div>
            
           </div>
@@ -222,9 +248,11 @@
 
             <div class="col-md-8 textarea col-centered">
                 <div>
-                    <div class="col-md-8 chat col-centered bottom-tools">
-                        <i class="fas fa-smile-wink" style="font-size:20px;" id="show-icons"></i>
-                    </div>
+
+                    <i class="fas fa-smile-wink icons" style="font-size:20px;" id="show-icons"></i>
+                    
+                    
+
                     <textarea  id="textarea" placeholder="Escreva uma mensagem aqui..."></textarea>
                 </div>
             </div>
@@ -238,6 +266,27 @@
 <script src="public/js/firebaseConfig.js"></script>
 <script src="public/js/core.js"></script>
 
+<script>
+function mandarIcone(icone) {
+    var data = new Date();
+    var body = {
+        'user': localStorage.getItem('user'),
+        'msg' : $("#textarea").val(),
+        'hora': data.getHours()+":"+data.getMinutes(),
+        'dia' : data.getDay(),
+        'data': data.getDate(),
+        'mes' : data.getMonth(),
+        'likes' : 0,
+        'icone': icone
+    }
+
+    firebase.database().ref("chat").push(body);
+}
+
+jQuery("#show-icons").click(function() {
+    $("#modal-icons").modal();
+})
+</script>
 
 <!--<script src="public/js/notification.js"></script>-->
 
