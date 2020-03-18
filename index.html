@@ -77,10 +77,12 @@
             padding:10px;
             border-radius:10px!important;
             margin-right:50px;
-            margin-bottom:2px;
-            background:#f0f4f7;
+            margin-bottom:3px;
+            /*background:#f0f4f7;*/
+            background:white;
             color:#788896;
             border-radius: 20px 50px!important;
+            border:1px solid #d7d4cf;
         }
         .divMsgEu {
             margin-left:50px;
@@ -89,6 +91,7 @@
             margin-right:0px;
             background:#dfe5ea;
             border-radius: 50px 20px!important;
+            border:0px;
         }
 
         .divMsgEu hora {
@@ -233,10 +236,18 @@
             display:block;
             border-radius:3px;
             padding:3px;
-            background:#8c9aa6;
-            border-radius:3px;
+            background:white;
+            border-radius:10px;
+            box-shadow:#666666 1px 3px 2px;
         }
-
+        iframe {
+            box-shadow:#666666 1px 3px 2px;
+            border-radius:3px;
+            padding:3px;
+            background:white;
+            border-radius:10px;
+            width:100%!important;
+        }
         .opcoes {
             font-size: 25px;
             margin-right:20px;
@@ -318,7 +329,7 @@
             
                 <center>
                     <label for="img">Selecione uma foto</i></label>
-                    <input type="file" name="img" id="img">
+                    <input type="file" name="img" id="img" accept="image/png, image/jpeg"  multiple>
                 </center>
             </div>
 
