@@ -55,12 +55,7 @@
             margin-bottom:20px;
             overflow-y: auto;
             padding-top:10px;
-            background:#ffffff;
             background:url('public/img/fundo-area-chat.png');
-        }
-        .enviar {
-            margin-top:20px;
-            margin-bottom:20px;
         }
         .img_perfil {
             border-radius:50%;
@@ -79,9 +74,8 @@
             border-radius:10px!important;
             margin-right:50px;
             margin-bottom:3px;
-            /*background:#f0f4f7;*/
             background:white;
-            color:#788896;
+            color:#333333;
             border-radius: 20px 50px!important;
             border:1px solid #d7d4cf;
         }
@@ -93,8 +87,13 @@
             background:#dfe5ea;
             border-radius: 50px 20px!important;
             border:0px;
+            border:1px solid #a9bcaf;
+            background:#f1fce7;
         }
+        .divMsgEu .img_perfil {
+            margin-left:10px;
 
+        }
         .divMsgEu hora {
             margin-right:50px!important;
         }
@@ -135,7 +134,7 @@
             text-align:right;
             font-size:13px;
             display:block;
-            color:#8ba2b6;
+            color:#5c7184!important;
         }
         tituloNomeUsuario {
             color:#7c96ac;
@@ -158,7 +157,6 @@
             color:white;
             margin-top:30px;
         }
-         
         ::-webkit-scrollbar-track {
             background-color:white;
         }
@@ -172,7 +170,6 @@
         ::-webkit-input-placeholder {
             color: #8198ac;
         }
-
         .body-modal-icons i {
             display:block;
             padding:10px;
@@ -183,12 +180,10 @@
             margin-left:3px;
             margin-bottom:3px;
         }
-
         .mandar-icone:hover {
             background:#8ba2b6;
             color:white;
         }
-
         .icons {
             margin-left:10px;
             margin-top:10px;
@@ -196,7 +191,6 @@
         .mensagem-tipo-icone {
             font-size:30px;
         }
-
         .fa-thumbs-up {
             color:#9999ff;
         }
@@ -224,14 +218,12 @@
         .fa-kiss-wink-heart {
             color:#ff6600;
         }
-
         #show-icons {
             color:#8ba2b6!important;
         }
         #show-icons:hover {
             opacity:0.80;
         }
-
         mensagem img {
             width:100%;
             display:block;
@@ -253,7 +245,6 @@
             font-size: 25px;
             margin-right:20px;
         }
-
         input[type='file'] {
             display: none
         }
@@ -264,6 +255,25 @@
             cursor: pointer;
             margin: 10px;
             padding: 6px 20px
+        }
+        @media only screen and (max-width: 600px) {
+            body {
+                margin:0;
+                padding:0;
+            }
+            .chat {
+                padding:0;
+            }
+            .chat-area-interna, .textarea {
+                padding:0;
+            }
+            .divMsg {
+                width:95%;
+                margin-left:10px;
+            }
+            .textarea {
+                width:100%!important;
+            }
         }
  </style>
 </head>
