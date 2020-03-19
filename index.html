@@ -56,6 +56,7 @@
             overflow-y: auto;
             padding-top:10px;
             background:#ffffff;
+            background:url('public/img/fundo-area-chat.png');
         }
         .enviar {
             margin-top:20px;
@@ -326,7 +327,6 @@
             <div class="modal-body body-modal-icons">
                 <center><progress value="0" max="100" id="uploader">0%</progress></center>
                 
-            
                 <center>
                     <label for="img">Selecione uma foto</i></label>
                     <input type="file" name="img" id="img" accept="image/png, image/jpeg"  multiple>
@@ -354,7 +354,9 @@
             <div class="col-md-8 chat col-centered">
                 <tituloNomeUsuario>...</tituloNomeUsuario>
                 <!--Div que recebe as mensagens-->
-                <div class="col-md-12 chat-area-interna"></div>
+                <div>
+                    <div class="col-md-12 chat-area-interna" style="padding-bottom:70px"></div>
+                </div>
             </div>
 
             <div class="col-md-8 textarea col-centered">
