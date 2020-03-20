@@ -192,24 +192,14 @@ function beep(x) {
 }
 
 
-
+// Mostra quando tem alguém digitando no chat
 temAlguemDigitando();
-firebase.database().ref("config").on("value", function(snapshot) {
-    if (snapshot.val().digitando != '0') {
-        $(".alguemDigitando").text(snapshot.val().digitando);
-    } else {
-        $(".alguemDigitando").text('');
-    }
-
-    console.log(snapshot.val().digitando);
-});
 
 function temAlguemDigitando() {
     var textarea = $("#textarea");
     var temporiza = false;
 
     textarea.on('input', function() {
-
         firebase.database().ref("config").set({'digitando': 'Alguém Digitando...'});
 
         clearTimeout(temporiza);
@@ -217,13 +207,14 @@ function temAlguemDigitando() {
               firebase.database().ref("config").set({'digitando': '0'});
         }, 3000);
                
-        /*if ($(this).val().length > 5) {
-            var usuario = localStorage.getItem('user');
-            firebase.database().ref("config").set({'digitando': 'Alguém Digitando...'});
+    });
+
+    firebase.database().ref("config").on("value", function(snapshot) {
+        if (snapshot.val().digitando != '0') {
+            $(".alguemDigitando").text(snapshot.val().digitando);
         } else {
-            firebase.database().ref("config").set({'digitando': '0'});
-        }*/
-       
+            $(".alguemDigitando").text('');
+        }
     });
 }
 
