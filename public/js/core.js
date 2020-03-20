@@ -206,14 +206,23 @@ firebase.database().ref("config").on("value", function(snapshot) {
 
 function temAlguemDigitando() {
     var textarea = $("#textarea");
-    textarea.keyup(function() {
-       
-        if ($(this).val().length > 5) {
+    var temporiza = false;
+
+    textarea.on('input', function() {
+
+        firebase.database().ref("config").set({'digitando': 'Alguém Digitando...'});
+
+        clearTimeout(temporiza);
+        temporiza = setTimeout(function(){
+              firebase.database().ref("config").set({'digitando': '0'});
+        }, 3000);
+               
+        /*if ($(this).val().length > 5) {
             var usuario = localStorage.getItem('user');
             firebase.database().ref("config").set({'digitando': 'Alguém Digitando...'});
         } else {
             firebase.database().ref("config").set({'digitando': '0'});
-        }
+        }*/
        
     });
 }
