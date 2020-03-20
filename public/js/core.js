@@ -121,30 +121,6 @@ function mensagens() {
         var div = $('.chat-area-interna');
         div.prop("scrollTop", div.prop("scrollHeight"));
 
-        $('.curtir').each(function() {
-            $(this).click(function() {
-                var id = $(this).attr('id');
-
-                var ref = firebase.database().ref("chat/"+id+"/likes");
-                var atual = firebase.database().ref("chat/"+id);
-                var likes = 0
-                atual.once('value', function(snapshot) {
-                    likes = snapshot.val().likes;
-                });
-
-
-                var dadosDoCurtir = {
-                    'usuario': localStorage.getItem('user')
-                }
-
-                ref.push(dadosDoCurtir);
-
-                //ref.update({likes:likes + 1});
-
-
-            });
-        });
-
     });
 }
 
@@ -202,15 +178,45 @@ function mesesPorExtenso(mes) {
     return $arrayMes[mes];
 }
 
-
-
-
+// Dispara um beep
+function beep(x) {
+    var context = new AudioContext();
+    var oscillator = context.createOscillator();
+    var contextGain = context.createGain();
   
+    oscillator.connect(contextGain);
+    contextGain.connect(context.destination);
+    oscillator.start(0);
+
+    contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x)
+}
 
 
 
+temAlguemDigitando();
+firebase.database().ref("config").on("value", function(snapshot) {
+    if (snapshot.val().digitando != '0') {
+        $(".alguemDigitando").text(snapshot.val().digitando);
+    } else {
+        $(".alguemDigitando").text('');
+    }
 
+    console.log(snapshot.val().digitando);
+});
 
+function temAlguemDigitando() {
+    var textarea = $("#textarea");
+    textarea.keyup(function() {
+       
+        if ($(this).val().length > 5) {
+            var usuario = localStorage.getItem('user');
+            firebase.database().ref("config").set({'digitando': 'Alguém Digitando...'});
+        } else {
+            firebase.database().ref("config").set({'digitando': '0'});
+        }
+       
+    });
+}
 
 
 
@@ -227,14 +233,34 @@ function teste() {
     });
 }
 
-function beep(x) {
-    var context = new AudioContext();
-    var oscillator = context.createOscillator();
-    var contextGain = context.createGain();
-  
-    oscillator.connect(contextGain);
-    contextGain.connect(context.destination);
-    oscillator.start(0);
 
-    contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + x)
-}
+
+
+
+
+
+/*
+$('.curtir').each(function() {
+    $(this).click(function() {
+        var id = $(this).attr('id');
+
+        var ref = firebase.database().ref("chat/"+id+"/likes");
+        var atual = firebase.database().ref("chat/"+id);
+        var likes = 0
+        atual.once('value', function(snapshot) {
+            likes = snapshot.val().likes;
+        });
+
+
+        var dadosDoCurtir = {
+            'usuario': localStorage.getItem('user')
+        }
+
+        ref.push(dadosDoCurtir);
+
+        //ref.update({likes:likes + 1});
+
+
+    });
+});
+*/
