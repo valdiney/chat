@@ -22,7 +22,7 @@ loading += "<center class='load'><i class='fas fa-comment balaoLoad'></i></cente
 $(".chat-area-interna").html(loading);
 
 // Carrega as mensagens assim que a página é carregada
-mensagens();
+mensagens(30);
 
 // Remove o load
 $(".load").hide();
@@ -62,10 +62,10 @@ $("#textarea").keypress(function(e) {
 });
 
 // Busca as mensagens no firebase e monta os balões na view
-function mensagens() {
+function mensagens(quantidade) {
     var ref = firebase.database().ref("chat");
 
-    ref.limitToLast(30).on("child_added", function(snapshot) {
+    ref.limitToLast(quantidade).on("child_added", function(snapshot) {
         var outroUsuario = false;
         if (snapshot.val().user != localStorage.getItem('user')) {
             outroUsuario = true;
@@ -219,25 +219,12 @@ function temAlguemDigitando() {
 }
 
 
-
-
-
-
-
-
-
 function teste() {
     var ref = firebase.database().ref("chat");
     ref.orderByChild("user").equalTo(localStorage.getItem('user')).on("child_added", function(snapshot) {
       console.log(snapshot.val().msg);
     });
 }
-
-
-
-
-
-
 
 /*
 $('.curtir').each(function() {
@@ -264,3 +251,5 @@ $('.curtir').each(function() {
     });
 });
 */
+
+//https://firebase.google.com/docs/database/web/lists-of-data?hl=pt-br
