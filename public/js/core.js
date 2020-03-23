@@ -103,7 +103,7 @@ function mensagens(quantidade) {
             if (file.indexOf('mp3') != -1) {
                 html += "<video controls='' autoplay='' name='media'><source src='"+snapshot.val().imagem+"' type='audio/mp3'></video>";
             } else {
-                html += "<mensagem><img src='"+snapshot.val().imagem+"'/></mensagem>";
+                html += "<mensagem><img src='"+snapshot.val().imagem+"' class='enderecoDeImagem' onclick='enderecoDeImagem($(this))'/></mensagem>";
             }
         }
         
@@ -204,7 +204,7 @@ function temAlguemDigitando() {
 
         clearTimeout(temporiza);
         temporiza = setTimeout(function(){
-              firebase.database().ref("config").set({'digitando': '0'});
+            firebase.database().ref("config").set({'digitando': '0'});
         }, 3000);
                
     });
@@ -217,6 +217,25 @@ function temAlguemDigitando() {
         }
     });
 }
+
+
+function enderecoDeImagem(src) {
+   
+    //alert(src.attr('src'));
+
+    $("#modal-mostrar-imagem").modal();
+    var imagem = "<img src='"+src.attr('src')+"'/>";
+    $(".body-modal-imagem").html(imagem);
+  
+    
+}
+
+
+
+function baixar(url) {
+    alert(url);
+}
+
 
 
 function teste() {

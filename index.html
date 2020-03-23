@@ -256,6 +256,9 @@
             margin: 10px;
             padding: 6px 20px
         }
+        .body-modal-imagem img {
+            width:100%;
+        }
         @media only screen and (max-width: 600px) {
             body {
                 margin:0;
@@ -275,6 +278,7 @@
                 width:100%!important;
             }
         }
+
  </style>
 </head>
 <body>
@@ -317,6 +321,24 @@
                 <i class="fas fas fa-angry mandar-icone"
                    onclick="mandarIcone('fas fas fa-angry')">
                 </i>
+            </div>
+          </div>
+      
+        </div>
+    </div>
+
+    <div id="modal-mostrar-imagem" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Imagem</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body body-modal-imagem">
+    
             </div>
           </div>
       
