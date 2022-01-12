@@ -40,7 +40,7 @@ function carregarMensagens(quantidade) {
             var file = snapshot.val().imagem;
             if (file !== undefined) {
                 if (file.indexOf('mp3') != -1) {
-                    html += "<video controls='' autoplay='' name='media'><source src='"+snapshot.val().imagem+"' type='audio/mp3'></video>";
+                    html += "<video controls='' autoplay='false' name='media'><source src='"+snapshot.val().imagem+"' type='audio/mp3'></video>";
                 } else {
                     html += "<mensagem><img src='"+snapshot.val().imagem+"'/></mensagem>";
                 }
